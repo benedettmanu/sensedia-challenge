@@ -11,7 +11,7 @@ import Separator from '@/assets/header/separator.svg'
 
 export function Header() {
   return (
-    <header className="w-full">
+    <header className="w-full fixed top-0 left-0 z-50">
       <FirstHeader />
       <SecondHeader />
     </header>
@@ -40,7 +40,7 @@ function FirstHeader() {
 
 function SecondHeader() {
   return (
-    <div className="h-[66px] w-full flex items-center justify-between pl-[24px] pr-[24px]">
+    <div className="h-[66px] w-full flex items-center justify-between pl-[24px] pr-[24px] bg-white">
       <div className="flex items-center gap-x-[10px]">
         <Image src={Icon} alt="Ícone" width={32} height={32} />
         <p className="text-[var(--color-primary)] text-[14px] font-bold">

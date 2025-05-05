@@ -5,7 +5,7 @@ import Icon3 from "@/assets/banner/trophy.svg";
 
 export function Banner() {
     return (
-        <div className="w-full h-[100px] bg-[var(--color-primary)] flex items-center text-[var(--white)]">
+        <div className="w-full h-[100px] mt-[153px] bg-[var(--color-primary)] flex items-center text-[var(--white)]">
             <div className="w-[870px] mx-auto flex">
                 <div className="flex items-center gap-x-[12px] mr-[120px]">
                     <Image src={Icon1} alt="Ícone 1" width={52} height={52} />

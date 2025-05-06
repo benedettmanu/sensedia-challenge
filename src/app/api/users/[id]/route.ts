@@ -31,7 +31,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const userId = params.id;
+    const userId = (await params).id;
 
     const user = await getUserById(userId);
 

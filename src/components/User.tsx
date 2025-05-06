@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+
 import SearchIcon from "@/assets/user/search.svg";
 import TrashIcon from "@/assets/user/trash-icon.svg";
 import { PaginatedUsers, User as UserType } from "@/models/User";

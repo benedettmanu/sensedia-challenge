@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function NewUserPage() {
     return (
-        <div className="w-[870px] mx-auto">
+        <div className="w-[870px] min-h-screen mx-auto">
             <div className="flex justify-between items-center mt-[153px] mb-[25px]">
                 <h1 className="text-[24px] text-[var(--user-gray)] font-bold">Novo Usuário</h1>
                 <Link

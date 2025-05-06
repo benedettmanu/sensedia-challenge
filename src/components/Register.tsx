@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import HelpIcon1 from '@/assets/register/life-ring.svg';
 import HelpIcon2 from '@/assets/register/heartbeat.svg';
 import HelpIcon3 from '@/assets/register/grin-alt.svg';
@@ -14,7 +15,12 @@ interface RegisterFormData {
     password: string;
 }
 
-const Register = () => {
+interface RegisterProps {
+    redirectPath?: string;
+}
+
+const Register = ({ redirectPath }: RegisterProps) => {
+    const router = useRouter();
     const [formData, setFormData] = useState<RegisterFormData>({
         username: '',
         fullName: '',
@@ -125,9 +131,12 @@ const Register = () => {
             });
             setSelectedDays(new Array(7).fill(false));
 
-            setNotification({ show: true, message: 'Usuário criado com sucesso!', type: 'success' });
-
-            setTimeout(() => setNotification({ show: false, message: '', type: '' }), 3000);
+            if (redirectPath) {
+                router.push(`${redirectPath}?notification=Usuário criado com sucesso!&type=success`);
+            } else {
+                setNotification({ show: true, message: 'Usuário criado com sucesso!', type: 'success' });
+                setTimeout(() => setNotification({ show: false, message: '', type: '' }), 3000);
+            }
 
         } catch (error) {
             console.error('Erro ao criar usuário:', error);
@@ -142,16 +151,20 @@ const Register = () => {
     };
 
     const handleCancel = () => {
-        setFormData({
-            username: '',
-            fullName: '',
-            email: '',
-            city: '',
-            password: '',
-        });
-        setSelectedDays(new Array(7).fill(false));
-        setErrors({});
-        setSubmitError('');
+        if (redirectPath) {
+            router.push(redirectPath);
+        } else {
+            setFormData({
+                username: '',
+                fullName: '',
+                email: '',
+                city: '',
+                password: '',
+            });
+            setSelectedDays(new Array(7).fill(false));
+            setErrors({});
+            setSubmitError('');
+        }
     };
 
     const helpItems = [
@@ -173,8 +186,10 @@ const Register = () => {
     ];
 
     return (
-        <div className="w-[875px] h-auto mx-auto mt-[20px] mb-[20px]">
-            <h1 className="text-[24px] text-[var(--user-gray)] font-bold mb-[25px]">Registro</h1>
+        <div className="w-[875px] h-auto mx-auto mb-[20px]">
+            {!redirectPath && (
+                <h1 className="text-[24px] text-[var(--user-gray)] font-bold mb-[25px]">Registro</h1>
+            )}
 
             <div className="w-[875px] h-[132px] flex justify-between mb-[60px]">
                 {helpItems.map((item, index) => (

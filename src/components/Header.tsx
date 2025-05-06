@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Logo from '@/assets/header/logo.svg'
-import Icon from '@/assets/header/icon.svg'
-import Arrow from '@/assets/header/arrow.svg'
-import Button1 from '@/assets/header/button_1.svg'
-import Button2 from '@/assets/header/button_2.svg'
-import Separator from '@/assets/header/separator.svg'
-import { UserDropdown } from './UserDropdownMenu'
+import Image from 'next/image';
+import Logo from '@/assets/header/logo.svg';
+import Icon from '@/assets/header/icon.svg';
+import Arrow from '@/assets/header/arrow.svg';
+import Button1 from '@/assets/header/button_1.svg';
+import Button2 from '@/assets/header/button_2.svg';
+import Separator from '@/assets/header/separator.svg';
+import { UserDropdown } from './UserDropdownMenu';
 
 export function Header() {
   return (
@@ -15,7 +15,7 @@ export function Header() {
       <FirstHeader />
       <SecondHeader />
     </header>
-  )
+  );
 }
 
 function FirstHeader() {
@@ -35,7 +35,7 @@ function FirstHeader() {
         Treinador de futebol
       </p>
     </div>
-  )
+  );
 }
 
 function SecondHeader() {

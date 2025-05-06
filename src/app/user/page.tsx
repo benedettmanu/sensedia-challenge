@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { User } from "@/components/User";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { User } from '@/components/User';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function UserListPage() {
   const searchParams = useSearchParams();
-  const notification = searchParams.get("notification");
-  const type = searchParams.get("type") || "success";
+  const notification = searchParams.get('notification');
+  const type = searchParams.get('type') || 'success';
 
   const [showNotification, setShowNotification] = useState(!!notification);
 
@@ -38,7 +38,7 @@ export default function UserListPage() {
       {showNotification && (
         <div
           className={`fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transition-all ${
-            type === "success" ? "bg-green-500" : "bg-red-500"
+            type === 'success' ? 'bg-green-500' : 'bg-red-500'
           } text-white z-50`}
         >
           {notification}

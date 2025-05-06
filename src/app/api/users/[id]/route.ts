@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
-import { deleteUserById, getUserById } from "@/services/userService";
+import { NextRequest, NextResponse } from 'next/server';
+import { deleteUserById, getUserById } from '@/services/userService';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const { id: userId } = await Promise.resolve(params);  
+    const { id: userId } = await Promise.resolve(params);
 
     const user = await getUserById(userId);
 
     if (!user) {
       return NextResponse.json(
-        { error: "Usuário não encontrado" },
+        { error: 'Usuário não encontrado' },
         { status: 404 }
       );
     }
@@ -21,7 +21,7 @@ export async function GET(
   } catch (error) {
     console.error(`Erro ao buscar usuário ${params.id}:`, error);
     return NextResponse.json(
-      { error: "Erro ao buscar usuário" },
+      { error: 'Erro ao buscar usuário' },
       { status: 500 }
     );
   }
@@ -38,7 +38,7 @@ export async function DELETE(
 
     if (!user) {
       return NextResponse.json(
-        { error: "Usuário não encontrado" },
+        { error: 'Usuário não encontrado' },
         { status: 404 }
       );
     }
@@ -47,7 +47,7 @@ export async function DELETE(
 
     if (!deleted) {
       return NextResponse.json(
-        { error: "Falha ao excluir usuário" },
+        { error: 'Falha ao excluir usuário' },
         { status: 500 }
       );
     }
@@ -59,7 +59,7 @@ export async function DELETE(
   } catch (error) {
     console.error(`Erro ao excluir usuário ${params.id}:`, error);
     return NextResponse.json(
-      { error: "Erro ao excluir usuário" },
+      { error: 'Erro ao excluir usuário' },
       { status: 500 }
     );
   }

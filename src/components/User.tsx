@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-import SearchIcon from "@/assets/user/search.svg";
-import TrashIcon from "@/assets/user/trash-icon.svg";
-import { PaginatedUsers, User as UserType } from "@/models/User";
-import { useDebounce } from "@/hook/useDebounce";
+import SearchIcon from '@/assets/user/search.svg';
+import TrashIcon from '@/assets/user/trash-icon.svg';
+import { PaginatedUsers, User as UserType } from '@/models/User';
+import { useDebounce } from '@/hook/useDebounce';
 
 interface DeleteModalProps {
   isOpen: boolean;
@@ -32,7 +32,7 @@ function DeleteModal({
           Confirmar exclusão
         </h2>
         <p className="mb-6 text-[var(--gray)]">
-          Tem certeza que deseja excluir o usuário{" "}
+          Tem certeza que deseja excluir o usuário{' '}
           <span className="font-bold">{user.name}</span>?
         </p>
         <div className="flex justify-end gap-4">
@@ -44,8 +44,9 @@ function DeleteModal({
             Cancelar
           </button>
           <button
-            className={`px-4 py-2 ${isDeleting ? "bg-red-400" : "bg-red-600 hover:bg-red-700"
-              } text-white rounded-[4px] transition-colors flex items-center justify-center min-w-[80px]`}
+            className={`px-4 py-2 ${
+              isDeleting ? 'bg-red-400' : 'bg-red-600 hover:bg-red-700'
+            } text-white rounded-[4px] transition-colors flex items-center justify-center min-w-[80px]`}
             onClick={onConfirm}
             disabled={isDeleting}
           >
@@ -74,7 +75,7 @@ function DeleteModal({
                 Excluindo...
               </>
             ) : (
-              "Excluir"
+              'Excluir'
             )}
           </button>
         </div>
@@ -91,13 +92,17 @@ export function User() {
     currentPage: 1,
     totalPages: 1,
   });
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<UserType | null>(null);
   const [deletingUser, setDeletingUser] = useState(false);
-  const [notification, setNotification] = useState({ show: false, message: '', type: '' });
+  const [notification, setNotification] = useState({
+    show: false,
+    message: '',
+    type: '',
+  });
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -110,13 +115,13 @@ export function User() {
       const response = await fetch(`/api/users?${queryParams}`);
 
       if (!response.ok) {
-        throw new Error("Erro ao buscar usuários");
+        throw new Error('Erro ao buscar usuários');
       }
 
       const data: PaginatedUsers = await response.json();
       setUserData(data);
     } catch (error) {
-      console.error("Erro ao buscar usuários:", error);
+      console.error('Erro ao buscar usuários:', error);
     } finally {
       setLoading(false);
     }
@@ -150,7 +155,7 @@ export function User() {
     setDeletingUser(true);
     try {
       const response = await fetch(`/api/users/${userToDelete.id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
 
       if (!response.ok) {
@@ -178,13 +183,23 @@ export function User() {
       setDeleteModalOpen(false);
       setUserToDelete(null);
 
-      setNotification({ show: true, message: 'Usuário excluído com sucesso!', type: 'success' });
+      setNotification({
+        show: true,
+        message: 'Usuário excluído com sucesso!',
+        type: 'success',
+      });
 
-      setTimeout(() => setNotification({ show: false, message: '', type: '' }), 3000);
+      setTimeout(
+        () => setNotification({ show: false, message: '', type: '' }),
+        3000
+      );
     } catch (error) {
-      console.error("Erro ao excluir usuário:", error);
+      console.error('Erro ao excluir usuário:', error);
       setNotification({ show: true, message: `Erro: ${error}`, type: 'error' });
-      setTimeout(() => setNotification({ show: false, message: '', type: '' }), 3000);
+      setTimeout(
+        () => setNotification({ show: false, message: '', type: '' }),
+        3000
+      );
     } finally {
       setDeletingUser(false);
     }
@@ -242,10 +257,11 @@ export function User() {
           </button>
 
           <button
-            className={`h-[36px] w-[36px] border border-[var(--medium-gray)] rounded-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${currentPage === 1
-              ? "font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]"
-              : ""
-              }`}
+            className={`h-[36px] w-[36px] border border-[var(--medium-gray)] rounded-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${
+              currentPage === 1
+                ? 'font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]'
+                : ''
+            }`}
             onClick={() => handlePageChange(1)}
           >
             1
@@ -255,28 +271,31 @@ export function User() {
 
           <div className="flex h-[36px] w-[108px]">
             <button
-              className={`w-[36px] border border-[var(--medium-gray)] border-r-0 rounded-l-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${currentPage === middleButtons[0]
-                ? "font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]"
-                : ""
-                }`}
+              className={`w-[36px] border border-[var(--medium-gray)] border-r-0 rounded-l-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${
+                currentPage === middleButtons[0]
+                  ? 'font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]'
+                  : ''
+              }`}
               onClick={() => handlePageChange(middleButtons[0])}
             >
               {middleButtons[0]}
             </button>
             <button
-              className={`w-[36px] border border-[var(--medium-gray)] transition-colors ${currentPage === middleButtons[1]
-                ? "font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]"
-                : "hover:bg-[var(--intense-light-gray)]"
-                }`}
+              className={`w-[36px] border border-[var(--medium-gray)] transition-colors ${
+                currentPage === middleButtons[1]
+                  ? 'font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]'
+                  : 'hover:bg-[var(--intense-light-gray)]'
+              }`}
               onClick={() => handlePageChange(middleButtons[1])}
             >
               {middleButtons[1]}
             </button>
             <button
-              className={`w-[36px] border border-[var(--medium-gray)] border-l-0 rounded-r-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${currentPage === middleButtons[2]
-                ? "font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]"
-                : ""
-                }`}
+              className={`w-[36px] border border-[var(--medium-gray)] border-l-0 rounded-r-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${
+                currentPage === middleButtons[2]
+                  ? 'font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]'
+                  : ''
+              }`}
               onClick={() => handlePageChange(middleButtons[2])}
             >
               {middleButtons[2]}
@@ -287,10 +306,11 @@ export function User() {
 
           {userData.totalPages > 1 && (
             <button
-              className={`h-[36px] w-[36px] border border-[var(--medium-gray)] rounded-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${currentPage === userData.totalPages
-                ? "font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]"
-                : ""
-                }`}
+              className={`h-[36px] w-[36px] border border-[var(--medium-gray)] rounded-[18px] transition-colors hover:bg-[var(--intense-light-gray)] ${
+                currentPage === userData.totalPages
+                  ? 'font-bold bg-[var(--medium-gray)] text-[var(--white)] hover:bg-[var(--medium-gray)]'
+                  : ''
+              }`}
               onClick={() => handlePageChange(userData.totalPages)}
             >
               {userData.totalPages}
@@ -448,8 +468,9 @@ export function User() {
 
       {notification.show && (
         <div
-          className={`fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transition-all ${notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'
-            } text-white`}
+          className={`fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transition-all ${
+            notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+          } text-white`}
         >
           {notification.message}
         </div>

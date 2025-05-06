@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useCallback } from "react";
-import { useParams } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState, useCallback } from 'react';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import ProfileIcon from "@/assets/header/avatar.svg";
-import { User } from "@/models/User";
+import ProfileIcon from '@/assets/header/avatar.svg';
+import { User } from '@/models/User';
 
 export default function UserProfile() {
   const params = useParams();
@@ -27,17 +27,17 @@ export default function UserProfile() {
 
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error("Usuário não encontrado");
+          throw new Error('Usuário não encontrado');
         }
-        throw new Error("Erro ao carregar dados do usuário");
+        throw new Error('Erro ao carregar dados do usuário');
       }
 
       const data = await response.json();
 
       setUser(data.user);
     } catch (err) {
-      console.error("Erro ao buscar perfil:", err);
-      setError(err instanceof Error ? err.message : "Erro desconhecido");
+      console.error('Erro ao buscar perfil:', err);
+      setError(err instanceof Error ? err.message : 'Erro desconhecido');
     } finally {
       setLoading(false);
     }
@@ -91,23 +91,23 @@ export default function UserProfile() {
     return null;
   }
 
-  const weekdaysString = user.weekdays || "";
+  const weekdaysString = user.weekdays || '';
 
   const weekdaysMap: Record<string, string> = {
-    "0": "Segunda",
-    "1": "Terça",
-    "2": "Quarta",
-    "3": "Quinta",
-    "4": "Sexta",
-    "5": "Sábado",
-    "6": "Domingo",
+    '0': 'Segunda',
+    '1': 'Terça',
+    '2': 'Quarta',
+    '3': 'Quinta',
+    '4': 'Sexta',
+    '5': 'Sábado',
+    '6': 'Domingo',
   };
 
   const formattedWeekdays = weekdaysString
-    .split(",")
-    .filter((day) => day.trim() !== "")
+    .split(',')
+    .filter((day) => day.trim() !== '')
     .map((day) => weekdaysMap[day.trim()] || day.trim())
-    .join(", ");
+    .join(', ');
 
   return (
     <div className="w-[870px] min-h-screen mx-auto mt-[153px]">
@@ -129,22 +129,22 @@ export default function UserProfile() {
 
           <div className="flex-1">
             <h2 className="text-[20px] font-bold text-[var(--user-gray)] mb-2">
-              {user.name || "Nome não disponível"}
+              {user.name || 'Nome não disponível'}
             </h2>
             <p className="text-[var(--gray)] mb-2">
               <span className="font-bold">Username:</span> {id}
             </p>
             <p className="text-[var(--gray)] mb-2">
-              <span className="font-bold">Email:</span>{" "}
-              {user?.email || "Email não disponível"}
+              <span className="font-bold">Email:</span>{' '}
+              {user?.email || 'Email não disponível'}
             </p>
             <p className="text-[var(--gray)] mb-2">
-              <span className="font-bold">Cidade:</span>{" "}
-              {user.city || "Cidade não disponível"}
+              <span className="font-bold">Cidade:</span>{' '}
+              {user.city || 'Cidade não disponível'}
             </p>
             <p className="text-[var(--gray)] mb-2">
-              <span className="font-bold">Dias disponíveis:</span>{" "}
-              {formattedWeekdays || "Nenhum dia selecionado"}
+              <span className="font-bold">Dias disponíveis:</span>{' '}
+              {formattedWeekdays || 'Nenhum dia selecionado'}
             </p>
           </div>
         </div>
